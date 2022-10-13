@@ -10,17 +10,25 @@ public class CalcService {
 	public String calculateAdd(
 			String NumA,
 			String NumB
-
 	)
 
-	{
-		BigDecimal AdA = new BigDecimal(NumA);
-		BigDecimal AdB = new BigDecimal(NumB);
-		BigDecimal AdR = AdA.add(AdB);
-		String AdResult = AdR.toString();
-		return AdResult;
+	{	
+			String AdResult = null;
+			BigDecimal AdA = null;
+			BigDecimal AdB = null;
+		try {
+			AdA = new BigDecimal(NumA);
+			AdB = new BigDecimal(NumB);
+			BigDecimal AdR = AdA.add(AdB);
+			AdResult = AdR.toString();
 
-	}
+		} catch (Exception e) {
+			AdResult = "Aderror";//エラーの場合はこれをキャッチ
+
+		}
+		return AdResult;
+		}
+
 
 	//引き算
 	public String calculateSubtract(
@@ -30,11 +38,21 @@ public class CalcService {
 			
 	 )
 	{
-	 BigDecimal SubA = new BigDecimal(NumA);
-	 BigDecimal SubB = new BigDecimal(NumB);
-	 BigDecimal SubR = SubA.subtract(SubB);
-	 String SubResult = SubR.toString();
-	 return SubResult;
+		    String SubResult=null;
+		    BigDecimal SubA=null;
+		    BigDecimal SubB=null;
+		 try {
+	        SubA = new BigDecimal(NumA);
+	        SubB = new BigDecimal(NumB);
+	        BigDecimal SubR = SubA.subtract(SubB);
+	        SubResult = SubR.toString();
+	        
+		 }catch(Exception e) {
+			 SubResult="Suberror";
+			 
+					 
+		 }
+	        return SubResult;
 
 	
 	}
@@ -46,11 +64,24 @@ public class CalcService {
 			
 	)
 	{
-	 BigDecimal MulA = new BigDecimal(NumA);
-	 BigDecimal MulB = new BigDecimal(NumB);
-	 BigDecimal MulR = MulA.multiply(MulB);
-	 String MulResult = MulR.toString();
-	 return MulResult;
+		
+		    String MulResult=null;
+		    BigDecimal MulA=null;
+		    BigDecimal MulB=null;
+		    
+		  try {
+	        MulA = new BigDecimal(NumA);
+	        MulB = new BigDecimal(NumB);
+	        BigDecimal MulR = MulA.multiply(MulB);
+	        MulResult = MulR.toString();
+	        
+	        
+		  }catch(Exception e) {
+			  MulResult="Mulerror";
+			  
+		  }
+	        
+	          return MulResult;
 
 	}
 	
@@ -61,15 +92,27 @@ public class CalcService {
 			String NumB
 	)
 	{
-	 BigDecimal DivA = new BigDecimal(NumA);
-	 BigDecimal DivB = new BigDecimal(NumB);{
-	 	try {
+		
+		    String DivResult=null;
+		    BigDecimal DivA=null;
+		    BigDecimal DivB=null;
+		    
+		  try {
+		    DivA = new BigDecimal(NumA);
+	        DivB = new BigDecimal(NumB);
 	 		BigDecimal DivR = DivA.divide(DivB);
-	 		 String DivResult = DivR.toString();
+	 		 DivResult = DivR.toString();
 	 		 return DivResult;
-	 	}
-	 	     catch(Exception e) {
-	 			 return"無限小数の答えになりました";
+	 	
+		  
+	     }catch(NumberFormatException e) { //記号の場合
+	    	 DivResult="Diverror";
+	    	 return DivResult;
+	 	     
+		  
+	     }catch(ArithmeticException e) { //無限小数の場合
+	 		System.out.println(e);	 
+	    	 return"無限小数の答えになりました";
 	 			 
 	 					 
 	 		 }
@@ -101,4 +144,4 @@ public class CalcService {
 	return AdResult;
 	*/
 
-}
+
