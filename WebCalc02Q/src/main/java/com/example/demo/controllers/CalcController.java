@@ -13,17 +13,28 @@ public class CalcController {
 
 	@Autowired
 	private CalcService service;
-
-	@PostMapping("resAdd")
+	
+	@PostMapping("calc") //ルーティング
+	public String calc() {
+		
+		
+		return "calc";
+	}
+	
+	@PostMapping("resAdd") //ルーティング
 	public String resAdd(
 			Model model,
 			@RequestParam("numA") String NumA,
 			@RequestParam("numB") String NumB
 
 	) {
-
-		model.addAttribute("kotae", service.calculateAdd(NumA, NumB));
-
+		String AdResult = service.calculateAdd(NumA, NumB);
+		if( AdResult == "Aderror") { //計算結果がエラーならエラー画面へ飛ぶ
+			return "error";
+		}
+		model.addAttribute("kotae", AdResult );//大事
+		
+		
 		return "res";
 
 	}
@@ -35,8 +46,12 @@ public class CalcController {
 			@RequestParam("numB") String NumB
 
 	) {
-
-		model.addAttribute("kotae", service.calculateSubtract(NumA, NumB));
+        String SubResult=service.calculateSubtract(NumA, NumB);
+        if(SubResult=="Suberror") {
+        	return"error";
+        	
+        }
+		model.addAttribute("kotae",SubResult);
 
 		return "res";
 
@@ -49,8 +64,11 @@ public class CalcController {
 			@RequestParam("numB") String NumB
 
 	) {
-
-		model.addAttribute("kotae", service.calculateMultiply(NumA, NumB));
+        String MulResult=service.calculateMultiply(NumA, NumB);
+        if(MulResult=="Mulerror") {
+        	return"error";
+        }
+		model.addAttribute("kotae", MulResult);
 
 		return "res";
 
@@ -63,8 +81,11 @@ public class CalcController {
 			@RequestParam("numB") String NumB
 
 	) {
-
-		model.addAttribute("kotae", service.calculateDivide(NumA, NumB));
+        String DivResult=service.calculateDivide(NumA, NumB);
+        if(DivResult=="Diverror") {
+        	return"error";
+        }
+		model.addAttribute("kotae", DivResult);
 
 		return "res";
 
