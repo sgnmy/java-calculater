@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--ThymeleafをHTMLファイルで使用する為-->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p>計算結果履歴一覧</p>
+	<!-- 足し算表示欄 -->
+	
+	<!--<b th:text="${kotae}"></b> <!--kotaeという変数を定義-->
+    <table>
+    <tr th:each="ResultHistory, Result : ${kotae}">
+    <!-- $はjavaの変数をhtmlを受け取れる。htmlの変数をjavaで受け取れる。橋渡し -->
+			<td th:text="${ResultHistory.Result}"></td>
+			
+		</tr>
+		</table>
+</body>
+</html>
